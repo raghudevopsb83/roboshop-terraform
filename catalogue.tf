@@ -17,8 +17,8 @@ resource "aws_instance" "catalogue" {
     }
 
     inline = [
-      "pip3.11 install ansible",
-      "ansible-pull -i localhost, -U https://github.com/raghudevopsb83/roboshop-shell roboshop.yml -e component_name=catalogue -e env-dev",
+      "sudo pip3.11 install ansible",
+      "ansible-pull -i localhost, -U https://github.com/raghudevopsb83/roboshop-shell roboshop.yml -e component_name=catalogue -e env=dev",
     ]
   }
 
