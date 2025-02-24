@@ -7,20 +7,20 @@ resource "aws_instance" "frontend" {
     Name = "frontend"
   }
 
-  provisioner "remote-exec" {
-
-    connection {
-      type     = "ssh"
-      user     = "ec2-user"
-      password = "DevOps321"
-      host     = self.public_ip
-    }
-
-    inline = [
-      "pip3.11 install ansible",
-      "ansible-pull -i localhost, -U https://github.com/raghudevopsb83/roboshop-ansible roboshop.yml -e component_name=frontend -e env-dev",
-    ]
-  }
+#   provisioner "remote-exec" {
+#
+#     connection {
+#       type     = "ssh"
+#       user     = "ec2-user"
+#       password = "DevOps321"
+#       host     = self.public_ip
+#     }
+#
+#     inline = [
+#       "pip3.11 install ansible",
+#       "ansible-pull -i localhost, -U https://github.com/raghudevopsb83/roboshop-ansible roboshop.yml -e component_name=frontend -e env-dev",
+#     ]
+#   }
 
 }
 
