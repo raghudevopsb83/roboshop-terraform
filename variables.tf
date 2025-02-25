@@ -18,3 +18,10 @@ variable "instances" {
   ]
 }
 
+variable "zone_id" {
+  default = "Z01662431H5LL60AVTC0E"
+}
+
+variable "env" {
+  default = dev
+}

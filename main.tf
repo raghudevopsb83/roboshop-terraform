@@ -10,14 +10,15 @@ resource "aws_instance" "instance" {
 }
 
 
-# resource "aws_route53_record" "catalogue" {
-#   zone_id = "Z01662431H5LL60AVTC0E"
-#   name    = "catalogue-dev"
-#   type    = "A"
-#   ttl     = 10
-#   records = [aws_instance.catalogue.private_ip]
-# }
-#
+resource "aws_route53_record" "record" {
+  count   = length(var.instances)
+  zone_id = var.zone_id
+  name    = "${var.instances[count.index]}-${var.env}"
+  type    = "A"
+  ttl     = 10
+  records = [aws_instance.instance[count.index].private_ip]
+}
+
 # resource "null_resource" "catalogue" {
 #   provisioner "remote-exec" {
 #
