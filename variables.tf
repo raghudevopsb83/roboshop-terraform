@@ -11,11 +11,11 @@ variable "vpc_security_group_ids" {
 }
 
 variable "instances" {
-  default = [
-    "mongodb",
-    "catalogue",
-    "frontend"
-  ]
+  default = {
+    mongodb = null
+    catalogue = null
+    frontend = null
+  }
 }
 
 variable "zone_id" {
