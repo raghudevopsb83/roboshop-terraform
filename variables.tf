@@ -23,5 +23,5 @@ variable "zone_id" {
 }
 
 variable "env" {
-  default = dev
+  default = "dev"
 }
