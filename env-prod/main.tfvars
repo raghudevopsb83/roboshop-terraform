@@ -13,7 +13,7 @@ instances = {
   }
 }
 
-zone_id = "Z01662431H5LL60AVTC0E"
+zone_id                = "Z01662431H5LL60AVTC0E"
 vpc_security_group_ids = ["sg-0ea2a448676b70f53"]
-env = "prod"
+env                    = "prod"
 
