@@ -18,6 +18,7 @@ resource "aws_route53_record" "record" {
 }
 
 resource "null_resource" "catalogue" {
+  depends_on = [aws_route53_record.record]
   provisioner "remote-exec" {
 
     connection {
