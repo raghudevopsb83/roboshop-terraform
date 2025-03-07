@@ -6,3 +6,4 @@ variable "zone_id" {}
 variable "env" {}
 variable "vault_token" {}
 variable "ansible_role" {}
+variable "root_volume_size" {}

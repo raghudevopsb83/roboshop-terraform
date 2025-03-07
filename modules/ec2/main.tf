@@ -3,6 +3,10 @@ resource "aws_instance" "instance" {
   instance_type          = var.instance_type
   vpc_security_group_ids = var.vpc_security_group_ids
 
+  root_block_device {
+    volume_size = var.root_volume_size
+  }
+
   tags = {
     Name = var.name
   }
