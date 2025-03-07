@@ -2,10 +2,12 @@ instances = {
     frontend = {
       ami_id        = "ami-09c813fb71547fc4f"
       instance_type = "t3.small"
+      ansible_role  = "frontend-docker"
     }
     catalogue = {
       ami_id        = "ami-09c813fb71547fc4f"
       instance_type = "t3.small"
+      ansible_role  = "catalogue-docker"
     }
     mongodb = {
       ami_id        = "ami-09c813fb71547fc4f"
@@ -18,14 +20,17 @@ instances = {
     cart = {
       ami_id        = "ami-09c813fb71547fc4f"
       instance_type = "t3.small"
+      ansible_role  = "cart-docker"
     }
     user = {
       ami_id        = "ami-09c813fb71547fc4f"
       instance_type = "t3.small"
+      ansible_role  = "user-docker"
     }
     shipping = {
       ami_id        = "ami-09c813fb71547fc4f"
       instance_type = "t3.small"
+      ansible_role  = "shipping-docker"
     }
     mysql = {
       ami_id        = "ami-09c813fb71547fc4f"
@@ -35,11 +40,11 @@ instances = {
       ami_id        = "ami-09c813fb71547fc4f"
       instance_type = "t3.small"
     }
-  payment = {
-    ami_id        = "ami-09c813fb71547fc4f"
-    instance_type = "t3.small"
-  }
-
+    payment = {
+      ami_id        = "ami-09c813fb71547fc4f"
+      instance_type = "t3.small"
+      ansible_role  = "payment-docker"
+    }
 }
 
 zone_id                = "Z01662431H5LL60AVTC0E"
