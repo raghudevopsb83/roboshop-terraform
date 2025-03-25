@@ -1,6 +1,5 @@
 name: Terraform Apply
-on:
-  workflow_run:
+on: workflow_dispatch
 jobs:
   Terrraform-Init:
     runs-on: self-hosted
