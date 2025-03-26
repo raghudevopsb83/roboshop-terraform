@@ -32,3 +32,17 @@ jobs:
           vault_token: ${{ secrets.vault_token }}
 
 
+
+  Helm-Install-Applications:
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-helm
+          path: helm
+      - name: Terraform Apply
+        run: |
+          cd helm
+          make dev
+
