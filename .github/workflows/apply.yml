@@ -1,7 +1,25 @@
 name: Terraform Apply
 on: workflow_dispatch
 jobs:
-  Terrraform-Init:
+#   Terraform-Init:
+#     runs-on: self-hosted
+#     steps:
+#       - name: Check out repository code
+#         uses: actions/checkout@v4
+#       - name: Terraform init
+#         run: |
+#           terraform init -backend-config=env-dev/state.tfvars
+#
+#   Terraform-Plan:
+#     runs-on: self-hosted
+#     steps:
+#       - name: Check out repository code
+#         uses: actions/checkout@v4
+#       - name: Terraform init
+#         run: |
+#           terraform plan -var-file=env-dev/main.tfvars
+
+  Terraform-Apply:
     runs-on: self-hosted
     steps:
       - name: Check out repository code
@@ -9,3 +27,7 @@ jobs:
       - name: Terraform init
         run: |
           terraform init -backend-config=env-dev/state.tfvars
+          terraform apply -var-file=env-dev/main.tfvars
+
+
+
