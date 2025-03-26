@@ -35,6 +35,7 @@ jobs:
 
 
   Helm-Install-Applications:
+    needs: Terraform-Apply
     runs-on: self-hosted
     steps:
       - name: Check out repository code
