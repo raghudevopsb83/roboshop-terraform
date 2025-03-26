@@ -43,8 +43,9 @@ jobs:
         with:
           repository: raghudevopsb83/roboshop-helm
           path: helm
-      - name: Terraform Apply
+      - name: Helm Install
         run: |
+          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
           cd helm
           make dev
 
