@@ -43,5 +43,16 @@ eks = {
     addons = {
       #metrics-server = {}
     }
+
+    access = {
+      workstation = {
+        role                    = "arn:aws:iam::633788536644:role/workstation-role"
+        kubernetes_groups       = []
+        policy_arn              = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
+        access_scope_type       = "cluster"
+        access_scope_namespaces = []
+      }
+    }
+
   }
 }
