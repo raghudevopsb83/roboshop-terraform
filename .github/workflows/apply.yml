@@ -39,7 +39,7 @@ jobs:
     #needs: Terraform-Apply
     runs-on: ubuntu-latest
     permissions:
-      actions: write
+      actions: read
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
