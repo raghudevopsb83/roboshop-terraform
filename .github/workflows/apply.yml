@@ -44,8 +44,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: raghudevopsb83/roboshop-cart
+          path: app
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-helm
+          path: helm
       - name: Helm Install
         run: |
+          cd app
           git log --format="%H" -n 1
           #gh workflow list
           #gh workflow run ci-pr.yaml
