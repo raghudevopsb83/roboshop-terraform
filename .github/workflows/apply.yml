@@ -35,8 +35,8 @@ jobs:
 
 
 
-  Helm-Install-Applications:
-    #needs: Terraform-Apply
+  Deploy-Cart:
+    needs: Terraform-Apply
     runs-on: self-hosted
     steps:
       - name: Check out repository code
@@ -56,4 +56,115 @@ jobs:
           GID=$(git log --format="%H" -n 1)
           cd ../helm
           bash argocd.sh cart dev $GID
+
+  Deploy-Catalogue:
+    needs: Terraform-Apply
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-catalogue
+          path: app
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-helm
+          path: helm
+      - name: Helm Install
+        run: |
+          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+          cd app
+          GID=$(git log --format="%H" -n 1)
+          cd ../helm
+          bash argocd.sh cart dev $GID
+
+  Deploy-User:
+    needs: Terraform-Apply
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-user
+          path: app
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-helm
+          path: helm
+      - name: Helm Install
+        run: |
+          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+          cd app
+          GID=$(git log --format="%H" -n 1)
+          cd ../helm
+          bash argocd.sh cart dev $GID
+
+  Deploy-Shipping:
+    needs: Terraform-Apply
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-shipping
+          path: app
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-helm
+          path: helm
+      - name: Helm Install
+        run: |
+          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+          cd app
+          GID=$(git log --format="%H" -n 1)
+          cd ../helm
+          bash argocd.sh cart dev $GID
+
+  Deploy-Payment:
+    needs: Terraform-Apply
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-payment
+          path: app
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-helm
+          path: helm
+      - name: Helm Install
+        run: |
+          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+          cd app
+          GID=$(git log --format="%H" -n 1)
+          cd ../helm
+          bash argocd.sh cart dev $GID
+
+  Deploy-Frontend:
+    needs: Terraform-Apply
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-frontend
+          path: app
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          repository: raghudevopsb83/roboshop-helm
+          path: helm
+      - name: Helm Install
+        run: |
+          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+          cd app
+          GID=$(git log --format="%H" -n 1)
+          cd ../helm
+          bash argocd.sh cart dev $GID
+
 
