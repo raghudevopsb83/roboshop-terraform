@@ -77,7 +77,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
-          bash argocd.sh cart dev $GID
+          bash argocd.sh catalogue dev $GID
 
   Deploy-User:
     needs: Terraform-Apply
@@ -99,7 +99,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
-          bash argocd.sh cart dev $GID
+          bash argocd.sh user dev $GID
 
   Deploy-Shipping:
     needs: Terraform-Apply
@@ -121,7 +121,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
-          bash argocd.sh cart dev $GID
+          bash argocd.sh shipping dev $GID
 
   Deploy-Payment:
     needs: Terraform-Apply
@@ -143,7 +143,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
-          bash argocd.sh cart dev $GID
+          bash argocd.sh payment dev $GID
 
   Deploy-Frontend:
     needs: Terraform-Apply
@@ -165,6 +165,6 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
-          bash argocd.sh cart dev $GID
+          bash argocd.sh frontend dev $GID
 
 
