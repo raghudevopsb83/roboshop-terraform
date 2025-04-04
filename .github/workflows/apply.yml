@@ -53,7 +53,9 @@ jobs:
       - name: Helm Install
         run: |
           cd app
-          git log --format="%H" -n 1
+          GID=$(git log --format="%H" -n 1)
+          cd ../helm
+          echo bash argocd.sh cart dev $GID
           #gh workflow list
           #gh workflow run ci-pr.yaml
         env:
