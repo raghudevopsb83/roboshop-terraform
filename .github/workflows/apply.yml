@@ -47,7 +47,7 @@ jobs:
       - name: Helm Install
         run: |
           gh workflow list
-          #gh workflow run ci-main.yaml
+          gh workflow run ci-pr.yaml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
