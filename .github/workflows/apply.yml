@@ -48,10 +48,7 @@ jobs:
           path: helm
       - name: Helm Install
         run: |
-          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
           gh workflow ls
-          #cd helm
-          #make dev
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
