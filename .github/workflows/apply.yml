@@ -37,8 +37,7 @@ jobs:
 
   Helm-Install-Applications:
     #needs: Terraform-Apply
-    runs-on: ubuntu-latest
-    permissions: write-all
+    runs-on: self-hosted
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -56,9 +55,4 @@ jobs:
           GID=$(git log --format="%H" -n 1)
           cd ../helm
           bash argocd.sh cart dev $GID
-          #gh workflow list
-          #gh workflow run ci-pr.yaml
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
