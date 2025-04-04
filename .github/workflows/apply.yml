@@ -19,34 +19,35 @@ jobs:
 #         run: |
 #           terraform plan -var-file=env-dev/main.tfvars
 
-  Terraform-Apply:
-    runs-on: self-hosted
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - name: Terraform Apply
-        run: |
-          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-          terraform init -backend-config=env-dev/state.tfvars
-          terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
-          #terraform plan -var-file=env-dev/main.tfvars -var vault_token=${vault_token} 2>&1 | tail -n6 | head -n1 >$GITHUB_STEP_SUMMARY
-        env:
-          vault_token: ${{ secrets.vault_token }}
+#   Terraform-Apply:
+#     runs-on: self-hosted
+#     steps:
+#       - name: Check out repository code
+#         uses: actions/checkout@v4
+#       - name: Terraform Apply
+#         run: |
+#           export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+#           terraform init -backend-config=env-dev/state.tfvars
+#           terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
+#           #terraform plan -var-file=env-dev/main.tfvars -var vault_token=${vault_token} 2>&1 | tail -n6 | head -n1 >$GITHUB_STEP_SUMMARY
+#         env:
+#           vault_token: ${{ secrets.vault_token }}
 
 
 
   Helm-Install-Applications:
     needs: Terraform-Apply
-    runs-on: self-hosted
+    runs-on: ubuntu
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
-          repository: raghudevopsb83/roboshop-helm
+          repository: raghudevopsb83/roboshop-cart
           path: helm
       - name: Helm Install
         run: |
           export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-          cd helm
-          make dev
+          gh workflow ls
+          #cd helm
+          #make dev
 
