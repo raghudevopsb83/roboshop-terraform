@@ -47,7 +47,7 @@ jobs:
           repository: raghudevopsb83/roboshop-cart
       - name: Helm Install
         run: |
-          gh workflow run ci-main.yml
+          gh workflow run ci-main.yaml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
