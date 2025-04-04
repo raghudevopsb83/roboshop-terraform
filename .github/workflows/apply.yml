@@ -51,6 +51,7 @@ jobs:
           path: helm
       - name: Helm Install
         run: |
+          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
