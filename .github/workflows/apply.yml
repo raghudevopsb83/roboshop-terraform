@@ -38,6 +38,8 @@ jobs:
   Helm-Install-Applications:
     #needs: Terraform-Apply
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
