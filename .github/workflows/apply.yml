@@ -52,4 +52,7 @@ jobs:
           gh workflow ls
           #cd helm
           #make dev
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
