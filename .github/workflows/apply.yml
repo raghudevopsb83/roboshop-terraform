@@ -55,6 +55,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
+          aws eks update-kubeconfig  --name dev
           bash argocd.sh cart dev $GID
 
   Deploy-Catalogue:
@@ -77,6 +78,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
+          aws eks update-kubeconfig  --name dev
           bash argocd.sh catalogue dev $GID
 
   Deploy-User:
@@ -99,6 +101,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
+          aws eks update-kubeconfig  --name dev
           bash argocd.sh user dev $GID
 
   Deploy-Shipping:
@@ -121,6 +124,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
+          aws eks update-kubeconfig  --name dev
           bash argocd.sh shipping dev $GID
 
   Deploy-Payment:
@@ -143,6 +147,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
+          aws eks update-kubeconfig  --name dev
           bash argocd.sh payment dev $GID
 
   Deploy-Frontend:
@@ -165,6 +170,7 @@ jobs:
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
+          aws eks update-kubeconfig  --name dev
           bash argocd.sh frontend dev $GID
 
 
