@@ -40,8 +40,8 @@ resource "helm_release" "kube-prometheus-stack" {
 resource "helm_release" "ingress" {
   depends_on = [null_resource.kubeconfig]
   name       = "ingress-nginx"
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
+  #   repository = "oci://ghcr.io/nginxinc/charts/nginx-ingress"
+  chart = "oci://ghcr.io/nginxinc/charts/nginx-ingress"
 
   values = [
     file("${path.module}/helm-config/ingress.yml")
