@@ -42,6 +42,11 @@ resource "helm_release" "ingress" {
   name       = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
+
+  values = [
+    file("${path.module}/helm-config/ingress.yml")
+  ]
+
 }
 
 
