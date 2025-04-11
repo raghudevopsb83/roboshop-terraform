@@ -16,19 +16,6 @@ resource "null_resource" "metrics-server" {
 }
 
 
-resource "null_resource" "argocd" {
-  depends_on = [null_resource.kubeconfig]
-
-  provisioner "local-exec" {
-    command = <<EOF
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-kubectl patch svc argocd-server -n argocd --patch '{"spec": {"type": "LoadBalancer"}}'
-EOF
-  }
-}
-
-
 resource "helm_release" "kube-prometheus-stack" {
   depends_on = [null_resource.kubeconfig]
   name       = "kube-prom-stack"
@@ -76,6 +63,27 @@ resource "helm_release" "external-dns" {
   name       = "external-dns"
   repository = "https://kubernetes-sigs.github.io/external-dns/"
   chart      = "external-dns"
+}
+
+
+resource "helm_release" "argocd" {
+  depends_on = [null_resource.kubeconfig, helm_release.external-dns]
+
+  name             = "argocd"
+  repository       = "https://argoproj.github.io/argo-helm"
+  chart            = "argo-cd"
+  namespace        = "argocd"
+  create_namespace = true
+  wait             = false
+
+  set {
+    name  = "global.domain"
+    value = "argocd-${var.env}.rdevopsb83.online"
+  }
+
+  values = [
+    file("${path.module}/helm-config/argocd.yml")
+  ]
 }
 
 
