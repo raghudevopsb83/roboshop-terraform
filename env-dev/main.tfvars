@@ -42,6 +42,7 @@ eks = {
 
     addons = {
       #metrics-server = {}
+      eks-pod-identity-agent = {}
     }
 
     access = {
