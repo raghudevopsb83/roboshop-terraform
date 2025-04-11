@@ -49,5 +49,23 @@ resource "helm_release" "ingress" {
 
 }
 
+resource "helm_release" "cert-manager" {
+  depends_on = [null_resource.kubeconfig]
+  name       = "cert-manager"
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  chart      = "cert-manager"
+  namespace = "cert-manager"
+  create_namespace = true
+
+  set = [
+    {
+      name  = "crds.enabled"
+      value = "true"
+    }
+  ]
+}
+
+
+
 
 
