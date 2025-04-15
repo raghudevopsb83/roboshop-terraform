@@ -11,3 +11,17 @@ grafana:
     - secretName: grafana-general-tls
       hosts:
       - grafana-dev.rdevopsb83.online
+
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - prometheus-dev.rdevopsb83.online
+    tls:
+    - secretName: prometheus-general-tls
+      hosts:
+        - prometheus-dev.rdevopsb83.online
+
