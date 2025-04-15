@@ -8,6 +8,5 @@ server:
     enabled: true
     ingressClassName: nginx
     tls: true
-    extraTls:
-      - secretName: argocd
+
 
