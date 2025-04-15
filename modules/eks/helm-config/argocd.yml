@@ -8,5 +8,6 @@ server:
     enabled: true
     ingressClassName: nginx
     tls: true
-
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
 
