@@ -7,7 +7,7 @@ grafana:
     hosts:
       - grafana-dev.rdevopsb83.online
     path: /
-    tls: []
+    tls:
     - secretName: grafana-general-tls
       hosts:
       - grafana-dev.rdevopsb83.online
