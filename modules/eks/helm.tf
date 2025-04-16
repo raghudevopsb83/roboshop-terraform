@@ -17,7 +17,7 @@ resource "null_resource" "metrics-server" {
 
 
 resource "helm_release" "kube-prometheus-stack" {
-  depends_on = [null_resource.kubeconfig]
+  depends_on = [null_resource.kubeconfig, helm_release.ingress, helm_release.cert-manager]
   name       = "kube-prom-stack"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
@@ -72,7 +72,7 @@ resource "helm_release" "external-dns" {
 
 
 resource "helm_release" "argocd" {
-  depends_on = [null_resource.kubeconfig, helm_release.external-dns]
+  depends_on = [null_resource.kubeconfig, helm_release.external-dns, helm_release.ingress, helm_release.cert-manager]
 
   name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
