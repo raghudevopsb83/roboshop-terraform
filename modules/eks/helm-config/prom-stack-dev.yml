@@ -25,7 +25,7 @@ prometheus:
       hosts:
         - prometheus-dev.rdevopsb83.online
   prometheusSpec:
-    additionalScrapeConfigs: []
+    additionalScrapeConfigs:
     - job_name: 'ec2-nodes'
       static_configs:
         - targets: [ '172.31.8.76:9100' ]
