@@ -4,10 +4,10 @@ resource "grafana_folder" "ec2-nodes" {
 }
 
 resource "grafana_dashboard" "node-exporter" {
-  folder = grafana_folder.ec2-nodes.uid
+  folder = "Dashboards"
   config_json = jsonencode({
     "title" : "Node Exporter Full",
-    "id" : "12486"
+    "dashboard_id" : "12486"
   })
 }
 
