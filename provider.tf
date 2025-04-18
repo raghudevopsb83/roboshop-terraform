@@ -13,9 +13,5 @@ provider "helm" {
   }
 }
 
-provider "grafana" {
-  url  = "https://grafana-dev.rdevopsb83.online"
-  auth = "admin:prom-operator"
-}
 
 
