@@ -107,7 +107,26 @@ resource "helm_release" "filebeat" {
 }
 
 
+#$ helm repo add autoscaler https://kubernetes.github.io/autoscaler
+#helm install my-release autoscaler/cluster-autoscaler \
+#    --set 'autoDiscovery.clusterName'=<CLUSTER NAME>
 
+# Cluster Autoscaler
+
+resource "helm_release" "cluster-autoscaler" {
+
+  depends_on = [null_resource.kubeconfig]
+  name       = "cluster-autoscaler"
+  repository = "https://kubernetes.github.io/autoscaler"
+  chart      = "cluster-autoscaler"
+  namespace  = "kube-system"
+  wait       = "false"
+
+  set {
+    name  = "autoDiscovery.clusterName"
+    value = var.env
+  }
+}
 
 
 
