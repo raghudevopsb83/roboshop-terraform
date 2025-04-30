@@ -136,7 +136,8 @@ resource "aws_iam_role" "cluster-autoscaler" {
             "ec2:DescribeInstanceTypes",
             "ec2:DescribeLaunchTemplateVersions",
             "ec2:GetInstanceTypesFromInstanceRequirements",
-            "eks:DescribeNodegroup"
+            "eks:DescribeNodegroup",
+            "autoscaling:SetDesiredCapacity"
           ],
           "Resource": ["*"]
         },
