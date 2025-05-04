@@ -29,6 +29,10 @@ resource "aws_eks_node_group" "main" {
     min_size     = each.value["min_nodes"]
   }
 
+  lifecycle {
+    ignore_changes = [ scaling_config ]
+  }
+
 }
 
 
