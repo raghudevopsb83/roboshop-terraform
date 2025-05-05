@@ -152,7 +152,7 @@ resource "helm_release" "external-secrets" {
 resource "null_resource" "external-secret-store" {
   provisioner "local-exec" {
     command = <<EOF
-kubectl apply -f - <<EOK
+kubectl apply -n kube-system -f - <<EOK
 apiVersion: v1
 kind: Secret
 metadata:
