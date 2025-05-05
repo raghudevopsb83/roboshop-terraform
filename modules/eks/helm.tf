@@ -152,7 +152,7 @@ resource "helm_release" "external-secrets" {
 resource "null_resource" "external-secret-store" {
   provisioner "local-exec" {
     command = <<EOF
-kubectl apply -n kube-system -f - <<EOK
+kubectl apply -f - <<EOK
 apiVersion: v1
 kind: Secret
 metadata:
@@ -167,7 +167,7 @@ metadata:
 spec:
   provider:
     vault:
-      server: "http://vault-int.rdevopsb83.online:8200"
+      server: "http://vault-internal.rdevopsb83.online:8200"
       path: "roboshop-${var.env}"
       version: "v2"
       auth:
