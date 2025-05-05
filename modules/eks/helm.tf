@@ -184,9 +184,9 @@ EOF
 resource "helm_release" "wave-config-reloader" {
 
   depends_on = [null_resource.kubeconfig]
-  name       = "wave-k8s"
+  name       = "wave"
   repository = "https://wave-k8s.github.io/wave/"
-  chart      = "wave-k8s"
+  chart      = "wave"
   namespace  = "kube-system"
   wait       = "false"
 
