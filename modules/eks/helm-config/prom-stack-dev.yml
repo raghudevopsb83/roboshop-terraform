@@ -6,7 +6,6 @@ grafana:
       cert-manager.io/cluster-issuer: letsencrypt
     hosts:
       - grafana-dev.rdevopsb83.online
-v
 
 prometheus:
   ingress:
