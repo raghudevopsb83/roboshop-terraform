@@ -50,4 +50,43 @@ alertmanager:
     - secretName: alertmanager-general-tls
       hosts:
       - alertmanager-dev.rdevopsb83.online
+  config:
+    global:
+      resolve_timeout: 5m
+    inhibit_rules:
+      - source_matchers:
+          - 'severity = critical'
+        target_matchers:
+          - 'severity =~ warning|info'
+        equal:
+          - 'namespace'
+          - 'alertname'
+      - source_matchers:
+          - 'severity = warning'
+        target_matchers:
+          - 'severity = info'
+        equal:
+          - 'namespace'
+          - 'alertname'
+      - source_matchers:
+          - 'alertname = InfoInhibitor'
+        target_matchers:
+          - 'severity = info'
+        equal:
+          - 'namespace'
+      - target_matchers:
+          - 'alertname = InfoInhibitor'
+    route:
+      receiver: 'emails'
+    receivers:
+    - name: 'emails'
+      email_configs:
+          - to: 'arunlal@abcdefg.com'
+            from: 'email@devopsproject.dev'
+            smarthost: 'email-smtp.us-west-2.amazonaws.com:587'
+            auth_username: '$SMTP_user_name'
+            auth_password: '$SMTP_password'
+            send_resolved: false
+    templates:
+    - '/etc/alertmanager/config/*.tmpl'
 

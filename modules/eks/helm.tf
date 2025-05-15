@@ -26,10 +26,10 @@ resource "helm_release" "kube-prometheus-stack" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
 
-
-  values = [
-    file("${path.module}/helm-config/prom-stack-${var.env}.yml")
-  ]
+  values = [templatefile("${path.module}/helm-config/prom-stack-template.yml", {
+    SMTP_user_name = data.vault_generic_secret.smtp.data["username"]
+    SMTP_password  = data.vault_generic_secret.smtp.data["password"]
+  })]
 }
 
 
