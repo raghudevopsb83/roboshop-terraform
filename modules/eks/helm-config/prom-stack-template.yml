@@ -92,9 +92,9 @@ alertmanager:
     - name: 'null'
     - name: 'emails'
       email_configs:
-          - to: 'arunlal@abcdefg.com'
-            from: 'email@devopsproject.dev'
-            smarthost: 'email-smtp.us-west-2.amazonaws.com:587'
+          - to: 'raghudevopsb83@gmail.com'
+            from: 'raghudevopsb83@gmail.com'
+            smarthost: 'email-smtp.us-east-1.amazonaws.com:587'
             auth_username: ${SMTP_user_name}
             auth_password: ${SMTP_password}
             send_resolved: false
