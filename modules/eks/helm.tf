@@ -157,11 +157,13 @@ resource "null_resource" "external-secret-store" {
   depends_on = [helm_release.external-secrets]
   provisioner "local-exec" {
     command = <<EOF
+kubectl create ns app
 kubectl apply -f - <<EOK
 apiVersion: v1
 kind: Secret
 metadata:
   name: vault-token
+  namespace: app
 data:
   token: aHZzLjVnM1RDTzdjbnZBVzQxRGZVV1NLanRHWA==
 ---
