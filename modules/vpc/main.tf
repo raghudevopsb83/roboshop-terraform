@@ -41,3 +41,16 @@ resource "aws_internet_gateway" "main" {
     Name = "${var.env}-${var.name}"
   }
 }
+
+resource "aws_eip" "ngw" {
+  domain   = "vpc"
+}
+
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.ngw.id
+  subnet_id     = aws_subnet.main["default"].id
+
+  tags = {
+    Name = "${var.env}-${var.name}"
+  }
+}
