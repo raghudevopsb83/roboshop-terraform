@@ -28,12 +28,12 @@ module "eks" {
 
 
 module "vpc" {
-  for_each = var.vpc
-  source   = "./modules/vpc"
-  vpc_cidr = each.value["cidr"]
-  name     = each.key
-  env      = var.env
-  subnets  = each.value["subnets"]
+  for_each    = var.vpc
+  source      = "./modules/vpc"
+  vpc_cidr    = each.value["cidr"]
+  name        = each.key
+  env         = var.env
+  subnets     = each.value["subnets"]
   default_vpc = var.default_vpc
 }
 

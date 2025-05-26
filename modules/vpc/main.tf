@@ -23,3 +23,15 @@ resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
   auto_accept   = true
 }
 
+resource "aws_route" "in-main" {
+  route_table_id            = aws_vpc.main.default_route_table_id
+  destination_cidr_block    = var.default_vpc["vpc_cidr"]
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
+}
+
+resource "aws_route" "in-default" {
+  route_table_id            = var.default_vpc["routetable_id"]
+  destination_cidr_block    = var.vpc_cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
+}
+
