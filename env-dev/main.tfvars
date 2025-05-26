@@ -62,8 +62,15 @@ eks = {
 vpc = {
   main = {
     cidr = "10.200.0.0/16"
+    subnets = {
+      default = {
+        cidr = "10.200.0.0/16"
+      }
+    }
   }
 }
+
+
 
 
 
