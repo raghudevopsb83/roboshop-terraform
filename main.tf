@@ -34,5 +34,6 @@ module "vpc" {
   name     = each.key
   env      = var.env
   subnets  = each.value["subnets"]
+  default_vpc = var.default_vpc
 }
 

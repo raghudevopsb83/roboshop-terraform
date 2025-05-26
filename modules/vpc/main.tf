@@ -16,3 +16,9 @@ resource "aws_subnet" "main" {
   }
 }
 
+resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
+  peer_owner_id = data.aws_caller_identity.current.account_id
+  peer_vpc_id   = aws_vpc.main.id
+  vpc_id        = var.default_vpc["vpc_id"]
+}
+

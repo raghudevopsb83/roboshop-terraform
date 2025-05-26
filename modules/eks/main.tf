@@ -30,7 +30,7 @@ resource "aws_eks_node_group" "main" {
   }
 
   lifecycle {
-    ignore_changes = [ scaling_config ]
+    ignore_changes = [scaling_config]
   }
 
 }

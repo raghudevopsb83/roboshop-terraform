@@ -8,7 +8,7 @@ resource "aws_instance" "instance" {
   }
 
   tags = {
-    Name = var.name
+    Name    = var.name
     monitor = "true"
   }
 }

@@ -46,17 +46,17 @@ resource "helm_release" "ingress" {
 }
 
 resource "helm_release" "cert-manager" {
-  depends_on = [null_resource.kubeconfig]
-  name       = "cert-manager"
-  repository = "https://charts.jetstack.io"
-  chart      = "cert-manager"
-  namespace = "cert-manager"
+  depends_on       = [null_resource.kubeconfig]
+  name             = "cert-manager"
+  repository       = "https://charts.jetstack.io"
+  chart            = "cert-manager"
+  namespace        = "cert-manager"
   create_namespace = true
 
   set {
-      name  = "crds.enabled"
-      value = "true"
-    }
+    name  = "crds.enabled"
+    value = "true"
+  }
 }
 
 resource "null_resource" "cert-manager-cluster-issuer" {
@@ -183,7 +183,7 @@ spec:
           key: "token"
 EOK
 EOF
-}
+  }
 }
 
 # Config Reloader

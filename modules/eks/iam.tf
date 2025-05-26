@@ -55,14 +55,14 @@ resource "aws_iam_role_policy_attachment" "node-AmazonEC2ContainerRegistryReadOn
 resource "aws_iam_role" "external-dns" {
   name = "${var.env}-eks-external-dns-role"
   assume_role_policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "pods.eks.amazonaws.com"
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "pods.eks.amazonaws.com"
         },
-        "Action": [
+        "Action" : [
           "sts:AssumeRole",
           "sts:TagSession"
         ]
@@ -80,14 +80,14 @@ resource "aws_iam_role_policy_attachment" "external-dns-route53-full-access" {
 resource "aws_iam_role" "k8s-prometheus" {
   name = "${var.env}-eks-prometheus-server-role"
   assume_role_policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "pods.eks.amazonaws.com"
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "pods.eks.amazonaws.com"
         },
-        "Action": [
+        "Action" : [
           "sts:AssumeRole",
           "sts:TagSession"
         ]
@@ -104,14 +104,14 @@ resource "aws_iam_role_policy_attachment" "k8s-prometheus-ec2-read-access" {
 resource "aws_iam_role" "cluster-autoscaler" {
   name = "${var.env}-eks-cluster-autoscaler-role"
   assume_role_policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "pods.eks.amazonaws.com"
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "pods.eks.amazonaws.com"
         },
-        "Action": [
+        "Action" : [
           "sts:AssumeRole",
           "sts:TagSession"
         ]
@@ -123,11 +123,11 @@ resource "aws_iam_role" "cluster-autoscaler" {
     name = "${var.env}-eks-cluster-autoscaler-inline-policy"
 
     policy = jsonencode({
-      "Version": "2012-10-17",
-      "Statement": [
+      "Version" : "2012-10-17",
+      "Statement" : [
         {
-          "Effect": "Allow",
-          "Action": [
+          "Effect" : "Allow",
+          "Action" : [
             "autoscaling:DescribeAutoScalingGroups",
             "autoscaling:DescribeAutoScalingInstances",
             "autoscaling:DescribeLaunchConfigurations",
@@ -138,15 +138,15 @@ resource "aws_iam_role" "cluster-autoscaler" {
             "ec2:GetInstanceTypesFromInstanceRequirements",
             "eks:DescribeNodegroup"
           ],
-          "Resource": ["*"]
+          "Resource" : ["*"]
         },
         {
-          "Effect": "Allow",
-          "Action": [
+          "Effect" : "Allow",
+          "Action" : [
             "autoscaling:SetDesiredCapacity",
             "autoscaling:TerminateInstanceInAutoScalingGroup"
           ],
-          "Resource": ["*"]
+          "Resource" : ["*"]
         }
       ]
     })
