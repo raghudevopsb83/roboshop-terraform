@@ -35,3 +35,9 @@ resource "aws_route" "in-default" {
   vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
 }
 
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    Name = "${var.env}-${var.name}"
+  }
+}
