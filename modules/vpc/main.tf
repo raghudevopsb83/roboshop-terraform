@@ -87,5 +87,5 @@ resource "aws_route" "ngw" {
   count                  = length(local.private_route_table_ids)
   route_table_id         = local.private_route_table_ids[count.index]
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = element(aws_internet_gateway.main.*.id, count.index)
+  nat_gateway_id         = element(aws_nat_gateway.main.*.id, count.index)
 }
