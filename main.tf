@@ -38,5 +38,5 @@ module "vpc" {
 }
 
 output "all" {
-  value = module.vpc.all
+  value = module.vpc
 }
