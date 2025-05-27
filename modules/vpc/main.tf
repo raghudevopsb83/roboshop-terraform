@@ -6,6 +6,13 @@ resource "aws_vpc" "main" {
   }
 }
 
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    Name = "${var.env}-${var.name}"
+  }
+}
+
 resource "aws_subnet" "main" {
   for_each   = var.subnets
   vpc_id     = aws_vpc.main.id
@@ -35,12 +42,7 @@ resource "aws_subnet" "main" {
 #   vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
 # }
 #
-# resource "aws_internet_gateway" "main" {
-#   vpc_id = aws_vpc.main.id
-#   tags = {
-#     Name = "${var.env}-${var.name}"
-#   }
-# }
+
 #
 # resource "aws_eip" "ngw" {
 #   domain   = "vpc"
