@@ -36,7 +36,3 @@ module "vpc" {
   subnets     = each.value["subnets"]
   default_vpc = var.default_vpc
 }
-
-output "all" {
-  value = module.vpc
-}
