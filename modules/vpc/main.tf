@@ -38,6 +38,21 @@ resource "aws_route_table_association" "main" {
   route_table_id = aws_route_table.main[each.key].id
 }
 
+locals {
+  public_route_table_ids = [ for k, v in var.subnets : aws_route_table.main[k].id ]
+
+}
+
+output "all" {
+  value = local.public_route_table_ids
+}
+
+# resource "aws_route" "igw" {
+#   route_table_id            = aws_route_table.testing.id
+#   destination_cidr_block    = "10.0.1.0/22"
+#   vpc_peering_connection_id = "pcx-45ff3dc1"
+# }
+
 # resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
 #   peer_owner_id = data.aws_caller_identity.current.account_id
 #   peer_vpc_id   = aws_vpc.main.id

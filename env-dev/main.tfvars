@@ -65,21 +65,27 @@ vpc = {
     subnets = {
       public-subnet-1 = {
         cidr = "10.200.0.0/24"
+        igw  = true
       }
       public-subnet-2 = {
         cidr = "10.200.1.0/24"
+        igw  = true
       }
       db-subnet-1 = {
         cidr = "10.200.2.0/24"
+        igw  = false
       }
       db-subnet-2 = {
         cidr = "10.200.3.0/24"
+        igw  = false
       }
       app-subnet-1 = {
         cidr = "10.200.4.0/24"
+        igw  = false
       }
       app-subnet-2 = {
         cidr = "10.200.5.0/24"
+        igw  = false
       }
     }
   }

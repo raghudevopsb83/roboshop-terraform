@@ -37,3 +37,6 @@ module "vpc" {
   default_vpc = var.default_vpc
 }
 
+output "all" {
+  value = module.vpc.all
+}
