@@ -23,6 +23,15 @@ resource "aws_subnet" "main" {
   }
 }
 
+resource "aws_route_table" "main" {
+  for_each   = var.subnets
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = each.key
+  }
+}
+
 # resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
 #   peer_owner_id = data.aws_caller_identity.current.account_id
 #   peer_vpc_id   = aws_vpc.main.id
