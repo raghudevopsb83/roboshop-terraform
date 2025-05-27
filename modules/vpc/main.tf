@@ -21,6 +21,7 @@ resource "aws_subnet" "main" {
 
   tags = {
     Name = each.key
+    group = each.value["group"]
   }
 }
 
