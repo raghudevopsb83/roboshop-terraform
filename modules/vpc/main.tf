@@ -39,7 +39,7 @@ resource "aws_route_table_association" "main" {
 }
 
 locals {
-  public_route_table_ids = [ for k, v in var.subnets : aws_route_table.main[k].id ]
+  public_route_table_ids = [ for k, v in var.subnets : aws_route_table.main[k].id if var.subnets[k].igw ]
 
 }
 
