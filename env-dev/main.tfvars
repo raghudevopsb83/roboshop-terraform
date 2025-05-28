@@ -6,25 +6,25 @@ db_instances = {
     root_volume_size = 20
     subnet_ref       = "db"
   }
-  redis = {
-    ami_id           = "ami-09c813fb71547fc4f"
-    instance_type    = "t3.small"
-    root_volume_size = 20
-    subnet_ref       = "db"
-  }
-
-  mysql = {
-    ami_id           = "ami-09c813fb71547fc4f"
-    instance_type    = "t3.small"
-    root_volume_size = 20
-    subnet_ref       = "db"
-  }
-  rabbitmq = {
-    ami_id           = "ami-09c813fb71547fc4f"
-    instance_type    = "t3.small"
-    root_volume_size = 20
-    subnet_ref       = "db"
-  }
+#   redis = {
+#     ami_id           = "ami-09c813fb71547fc4f"
+#     instance_type    = "t3.small"
+#     root_volume_size = 20
+#     subnet_ref       = "db"
+#   }
+#
+#   mysql = {
+#     ami_id           = "ami-09c813fb71547fc4f"
+#     instance_type    = "t3.small"
+#     root_volume_size = 20
+#     subnet_ref       = "db"
+#   }
+#   rabbitmq = {
+#     ami_id           = "ami-09c813fb71547fc4f"
+#     instance_type    = "t3.small"
+#     root_volume_size = 20
+#     subnet_ref       = "db"
+#   }
 
 }
 
