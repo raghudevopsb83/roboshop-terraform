@@ -39,6 +39,9 @@ resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
   from_port         = 22
   ip_protocol       = "tcp"
   to_port           = 22
+  tags = {
+    Name = each.key
+  }
 }
 
 resource "aws_route53_record" "record" {
