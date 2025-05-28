@@ -31,6 +31,14 @@ resource "aws_vpc_security_group_egress_rule" "egress" {
   ip_protocol       = "-1"
 }
 
+resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
+  count             = length(var.bastion_ssh_nodes)
+  security_group_id = aws_security_group.main.id
+  cidr_ipv4         = var.bastion_ssh_nodes[count.index]
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
 
 resource "aws_route53_record" "record" {
   zone_id = var.zone_id

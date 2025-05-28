@@ -119,5 +119,6 @@ default_vpc = {
   routetable_id = "rtb-02807cbba5772ca48"
 }
 
+bastion_ssh_nodes = ["172.31.34.25/32", "172.31.2.181/32"]
 
 
