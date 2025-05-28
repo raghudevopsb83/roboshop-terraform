@@ -16,19 +16,18 @@ module "ec2" {
   app_cidr          = each.value["app_cidr"]
   port              = each.value["port"]
 }
-#
-#
-#
-# module "eks" {
-#   for_each    = var.eks
-#   source      = "./modules/eks"
-#   env         = var.env
-#   eks_version = each.value["eks_version"]
-#   subnets     = each.value["subnets"]
-#   node_groups = each.value["node_groups"]
-#   addons      = each.value["addons"]
-#   access      = each.value["access"]
-# }
+
+
+module "eks" {
+  for_each    = var.eks
+  source      = "./modules/eks"
+  env         = var.env
+  eks_version = each.value["eks_version"]
+  node_groups = each.value["node_groups"]
+  addons      = each.value["addons"]
+  access      = each.value["access"]
+  subnet_ids        = module.vpc["main"].subnets["app"]
+}
 
 
 module "vpc" {

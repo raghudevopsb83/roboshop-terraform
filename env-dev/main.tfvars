@@ -54,7 +54,6 @@ env                    = "dev"
 
 eks = {
   main = {
-    subnets     = ["subnet-05554f3d4c8b12f4c", "subnet-028fcdd556176df9d"]
     eks_version = 1.32
     node_groups = {
       main = {
