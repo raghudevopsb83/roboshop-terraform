@@ -1,7 +1,7 @@
 resource "aws_instance" "instance" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  vpc_security_group_ids = var.vpc_security_group_ids
+  vpc_security_group_ids = [aws_security_group.main.id]
   subnet_id              = var.subnet_ids[0]
 
   root_block_device {
