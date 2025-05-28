@@ -47,26 +47,25 @@ resource "aws_route" "igw" {
   gateway_id             = aws_internet_gateway.main.id
 }
 
-# resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
-#   peer_owner_id = data.aws_caller_identity.current.account_id
-#   peer_vpc_id   = aws_vpc.main.id
-#   vpc_id        = var.default_vpc["vpc_id"]
-#   auto_accept   = true
-# }
-#
-# resource "aws_route" "in-main" {
-#   route_table_id            = aws_vpc.main.default_route_table_id
-#   destination_cidr_block    = var.default_vpc["vpc_cidr"]
-#   vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
-# }
-#
-# resource "aws_route" "in-default" {
-#   route_table_id            = var.default_vpc["routetable_id"]
-#   destination_cidr_block    = var.vpc_cidr
-#   vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
-# }
-#
+resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
+  peer_owner_id = data.aws_caller_identity.current.account_id
+  peer_vpc_id   = aws_vpc.main.id
+  vpc_id        = var.default_vpc["vpc_id"]
+  auto_accept   = true
+}
 
+resource "aws_route" "in-main" {
+  count                     = length(local.all_route_table_ids)
+  route_table_id            = local.all_route_table_ids[count.index]
+  destination_cidr_block    = var.default_vpc["vpc_cidr"]
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
+}
+
+resource "aws_route" "in-default" {
+  route_table_id            = var.default_vpc["routetable_id"]
+  destination_cidr_block    = var.vpc_cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
+}
 
 resource "aws_eip" "ngw" {
   count  = length(local.public_subnet_ids)
@@ -83,10 +82,11 @@ resource "aws_nat_gateway" "main" {
   }
 }
 
-
 resource "aws_route" "ngw" {
   count                  = length(local.private_route_table_ids)
   route_table_id         = local.private_route_table_ids[count.index]
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = element(aws_nat_gateway.main.*.id, count.index)
 }
+
+
