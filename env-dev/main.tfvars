@@ -143,4 +143,6 @@ bastion_ssh_nodes = {
   github_runner = "172.31.2.181/32"
 }
 
+kms_arn = "arn:aws:kms:us-east-1:633788536644:key/ac0ffd8a-f1c7-4760-bad4-35d9fee335bb"
+
 

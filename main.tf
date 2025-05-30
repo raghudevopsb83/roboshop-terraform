@@ -1,33 +1,33 @@
-module "ec2" {
-  for_each = var.db_instances
-  source   = "./modules/ec2"
-
-  ami_id            = each.value["ami_id"]
-  env               = var.env
-  instance_type     = each.value["instance_type"]
-  name              = each.key
-  zone_id           = var.zone_id
-  vault_token       = var.vault_token
-  ansible_role      = lookup(each.value, "ansible_role", each.key)
-  root_volume_size  = each.value["root_volume_size"]
-  subnet_ids        = module.vpc["main"].subnets["db"]
-  vpc_id            = module.vpc["main"].vpc["id"]
-  bastion_ssh_nodes = var.bastion_ssh_nodes
-  app_cidr          = each.value["app_cidr"]
-  port              = each.value["port"]
-}
-
-
-module "eks" {
-  for_each    = var.eks
-  source      = "./modules/eks"
-  env         = var.env
-  eks_version = each.value["eks_version"]
-  node_groups = each.value["node_groups"]
-  addons      = each.value["addons"]
-  access      = each.value["access"]
-  subnet_ids        = module.vpc["main"].subnets["app"]
-}
+# module "ec2" {
+#   for_each = var.db_instances
+#   source   = "./modules/ec2"
+#
+#   ami_id            = each.value["ami_id"]
+#   env               = var.env
+#   instance_type     = each.value["instance_type"]
+#   name              = each.key
+#   zone_id           = var.zone_id
+#   vault_token       = var.vault_token
+#   ansible_role      = lookup(each.value, "ansible_role", each.key)
+#   root_volume_size  = each.value["root_volume_size"]
+#   subnet_ids        = module.vpc["main"].subnets["db"]
+#   vpc_id            = module.vpc["main"].vpc["id"]
+#   bastion_ssh_nodes = var.bastion_ssh_nodes
+#   app_cidr          = each.value["app_cidr"]
+#   port              = each.value["port"]
+# }
+#
+#
+# module "eks" {
+#   for_each    = var.eks
+#   source      = "./modules/eks"
+#   env         = var.env
+#   eks_version = each.value["eks_version"]
+#   node_groups = each.value["node_groups"]
+#   addons      = each.value["addons"]
+#   access      = each.value["access"]
+#   subnet_ids        = module.vpc["main"].subnets["app"]
+# }
 
 
 module "vpc" {
