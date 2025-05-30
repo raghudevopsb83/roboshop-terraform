@@ -22,26 +22,46 @@ resource "aws_eks_cluster" "main" {
   }
 }
 
-# resource "aws_eks_node_group" "main" {
-#   for_each        = var.node_groups
-#   cluster_name    = aws_eks_cluster.main.name
-#   node_group_name = each.key
-#   node_role_arn   = aws_iam_role.node-role.arn
-#   subnet_ids      = var.subnet_ids
-#   instance_types  = each.value["instance_types"]
-#   capacity_type   = each.value["capacity_type"]
-#
-#   scaling_config {
-#     desired_size = each.value["min_nodes"]
-#     max_size     = each.value["max_nodes"]
-#     min_size     = each.value["min_nodes"]
-#   }
-#
-#   lifecycle {
-#     ignore_changes = [scaling_config]
-#   }
-#
-# }
+resource "aws_launch_template" "main" {
+  for_each        = var.node_groups
+  name = each.key
+
+  block_device_mappings {
+    device_name = "/dev/xvda"
+
+    ebs {
+      volume_size = 20
+      encrypted = true
+      kms_key_id = var.kms_arn
+    }
+  }
+
+}
+
+resource "aws_eks_node_group" "main" {
+  for_each        = var.node_groups
+  cluster_name    = aws_eks_cluster.main.name
+  node_group_name = each.key
+  node_role_arn   = aws_iam_role.node-role.arn
+  subnet_ids      = var.subnet_ids
+  instance_types  = each.value["instance_types"]
+  capacity_type   = each.value["capacity_type"]
+
+  launch_template {
+    version = aws_launch_template.main[each.key].name
+  }
+
+  scaling_config {
+    desired_size = each.value["min_nodes"]
+    max_size     = each.value["max_nodes"]
+    min_size     = each.value["min_nodes"]
+  }
+
+  lifecycle {
+    ignore_changes = [scaling_config]
+  }
+
+}
 
 
 resource "aws_eks_addon" "addons" {
