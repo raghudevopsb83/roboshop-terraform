@@ -48,7 +48,8 @@ resource "aws_eks_node_group" "main" {
   capacity_type   = each.value["capacity_type"]
 
   launch_template {
-    version = aws_launch_template.main[each.key].name
+    name = aws_launch_template.main[each.key].name
+    version = "$Latest"
   }
 
   scaling_config {
