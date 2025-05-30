@@ -27,8 +27,8 @@ module "eks" {
   node_groups = each.value["node_groups"]
   addons      = each.value["addons"]
   access      = each.value["access"]
-  subnet_ids        = module.vpc["main"].subnets["app"]
-  key_arn     = var.kms_arn
+  subnet_ids  = module.vpc["main"].subnets["app"]
+  kms_arn     = var.kms_arn
 }
 
 

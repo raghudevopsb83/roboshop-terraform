@@ -15,8 +15,8 @@ resource "aws_eks_cluster" "main" {
 
   # This is not needed for us as we dont use local secrets, We are using all secrets from vault.
   encryption_config {
-   resources = ["secrets"]
-   provider {
+    resources = ["secrets"]
+    provider {
       key_arn = var.kms_arn
     }
   }

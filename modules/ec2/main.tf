@@ -6,8 +6,8 @@ resource "aws_instance" "instance" {
 
   root_block_device {
     volume_size = var.root_volume_size
-    encrypted = true
-    kms_key_id = var.kms_arn
+    encrypted   = true
+    kms_key_id  = var.kms_arn
   }
 
   tags = {
