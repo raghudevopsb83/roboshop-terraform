@@ -23,16 +23,16 @@ resource "aws_eks_cluster" "main" {
 }
 
 resource "aws_launch_template" "main" {
-  for_each        = var.node_groups
-  name = each.key
+  for_each = var.node_groups
+  name     = each.key
 
   block_device_mappings {
     device_name = "/dev/xvda"
 
     ebs {
       volume_size = 20
-      encrypted = true
-      kms_key_id = var.kms_arn
+      encrypted   = true
+      kms_key_id  = var.kms_arn
     }
   }
 
@@ -48,7 +48,7 @@ resource "aws_eks_node_group" "main" {
   capacity_type   = each.value["capacity_type"]
 
   launch_template {
-    name = aws_launch_template.main[each.key].name
+    name    = aws_launch_template.main[each.key].name
     version = "$Latest"
   }
 
