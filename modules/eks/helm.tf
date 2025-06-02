@@ -257,6 +257,7 @@ resource "null_resource" "kiali" {
   provisioner "local-exec" {
     command = <<EOF
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.26/samples/addons/kiali.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.26/samples/addons/prometheus.yaml
 kubectl apply -f - <<EOK
 apiVersion: networking.k8s.io/v1
 kind: Ingress
