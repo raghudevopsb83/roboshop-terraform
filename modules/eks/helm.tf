@@ -158,6 +158,7 @@ resource "null_resource" "external-secret-store" {
   provisioner "local-exec" {
     command = <<EOF
 kubectl create ns app
+kubectl label namespace app istio-injection=enabled --overwrite
 kubectl apply -f - <<EOK
 apiVersion: v1
 kind: Secret
@@ -258,6 +259,7 @@ resource "null_resource" "kiali" {
     command = <<EOF
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.26/samples/addons/kiali.yaml
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.26/samples/addons/prometheus.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.26/samples/addons/grafana.yaml
 kubectl apply -f - <<EOK
 apiVersion: networking.k8s.io/v1
 kind: Ingress
