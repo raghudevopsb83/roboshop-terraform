@@ -249,7 +249,7 @@ resource "helm_release" "istiod" {
 #   }
 # }
 
-resource "null_resource" "external-secret-store" {
+resource "null_resource" "kiali" {
     depends_on = [
       null_resource.kubeconfig,
       helm_release.istiod
