@@ -218,7 +218,7 @@ resource "helm_release" "istio-base" {
 resource "helm_release" "istiod" {
   depends_on = [
     null_resource.kubeconfig,
-    helm_release.istiod
+    helm_release.istio-base
   ]
 
   name             = "istiod"
@@ -226,6 +226,23 @@ resource "helm_release" "istiod" {
   chart            = "istiod"
   namespace        = "istio-system"
   create_namespace = true
+}
+
+resource "helm_release" "kiali" {
+  depends_on = [
+    null_resource.kubeconfig,
+    helm_release.istiod
+  ]
+
+  name             = "kiali-server"
+  repository       = "https://kiali.org/helm-charts"
+  chart            = "kiali-server"
+  namespace        = "istio-system"
+  create_namespace = true
+  set {
+    name  = "server.web_fqdn"
+    value = "kiali-${var.env}.rdevopsb83.online"
+  }
 }
 
 
