@@ -228,25 +228,25 @@ resource "helm_release" "istiod" {
   create_namespace = true
 }
 
-resource "helm_release" "kiali" {
-  depends_on = [
-    null_resource.kubeconfig,
-    helm_release.istiod
-  ]
-
-  name             = "kiali-server"
-  repository       = "https://kiali.org/helm-charts"
-  chart            = "kiali-server"
-  namespace        = "istio-system"
-  create_namespace = true
-  set {
-    name  = "server.web_fqdn"
-    value = "kiali-${var.env}.rdevopsb83.online"
-  }
-  set {
-    name  = "deployment.ingress.enabled"
-    value = true
-  }
-}
+# resource "helm_release" "kiali" {
+#   depends_on = [
+#     null_resource.kubeconfig,
+#     helm_release.istiod
+#   ]
+#
+#   name             = "kiali-server"
+#   repository       = "https://kiali.org/helm-charts"
+#   chart            = "kiali-server"
+#   namespace        = "istio-system"
+#   create_namespace = true
+#   set {
+#     name  = "server.web_fqdn"
+#     value = "kiali-${var.env}.rdevopsb83.online"
+#   }
+#   set {
+#     name  = "deployment.ingress.enabled"
+#     value = true
+#   }
+# }
 
 
