@@ -243,6 +243,10 @@ resource "helm_release" "kiali" {
     name  = "server.web_fqdn"
     value = "kiali-${var.env}.rdevopsb83.online"
   }
+  set {
+    name  = "deployment.ingress.enabled"
+    value = true
+  }
 }
 
 
