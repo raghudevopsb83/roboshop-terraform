@@ -203,7 +203,6 @@ resource "helm_release" "wave-config-reloader" {
   }
 }
 
-
 resource "helm_release" "istio-base" {
   depends_on = [
     null_resource.kubeconfig
@@ -216,5 +215,17 @@ resource "helm_release" "istio-base" {
   create_namespace = true
 }
 
+resource "helm_release" "istiod" {
+  depends_on = [
+    null_resource.kubeconfig,
+    helm_release.istiod
+  ]
+
+  name             = "istiod"
+  repository       = "https://istio-release.storage.googleapis.com/charts"
+  chart            = "istiod"
+  namespace        = "istio-system"
+  create_namespace = true
+}
 
 
