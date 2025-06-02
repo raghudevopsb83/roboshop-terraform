@@ -249,4 +249,38 @@ resource "helm_release" "istiod" {
 #   }
 # }
 
+resource "null_resource" "external-secret-store" {
+    depends_on = [
+      null_resource.kubeconfig,
+      helm_release.istiod
+    ]
+  provisioner "local-exec" {
+    command = <<EOF
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.26/samples/addons/kiali.yaml
+kubectl apply -f - <<EOK
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/secure-backends: "false"
+  name: kiali
+  namespace: istio-system
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kiali-dev.rdevopsb83.online
+    http:
+      paths:
+      - backend:
+          service:
+            name: kiali
+            port:
+              number: 20001
+        path: /kiali
+        pathType: Prefix
+EOK
+EOF
+  }
+}
 
