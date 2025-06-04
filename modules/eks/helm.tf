@@ -229,7 +229,7 @@ resource "helm_release" "istiod" {
   create_namespace = true
   set {
     name  = "revision"
-    value = 1.25
+    value = "1.25"
   }
 }
 
